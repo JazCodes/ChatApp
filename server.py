@@ -10,7 +10,7 @@ def home_page():
 
 @app.route('/string')
 def string():
-	return("hello")
 
+	return("dsad")
 if __name__ == '__main__':
 	app.run()
