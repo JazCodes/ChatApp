@@ -8,5 +8,9 @@ app = Flask(__name__)
 def home_page():
 	return render_template("index.html")
 
+@app.route('/string')
+def string():
+	return("hello")
+
 if __name__ == '__main__':
 	app.run()
