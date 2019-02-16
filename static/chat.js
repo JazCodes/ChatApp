@@ -18,8 +18,23 @@ $( document ).ready(function() {
 	  		}
 
 		});
-		console.log('Line 14', top10);
+
+
+	$("#second").click(function() {
+		console.log("Handler for .click() called.");
+		var top10;
+		$.get( "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty", function( data ) {
+	  		next10 = data.slice(11,20);
+	  		for(var i = 0; i < next10.length; i++) {
+	  			var currenId = next10[i];
+	  			$.get(`https://hacker-news.firebaseio.com/v0/item/${currenId}.json?print=pretty`, function ( data ) {
+	  				$(" #second-string" ).append( `<div> ${data['title']} </div>`);
+	  				console.log('line 35', next10);
+	  			});
+
+	  		}
+
+		});
 	});
 });
-
-
+});
