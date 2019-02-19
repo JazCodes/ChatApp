@@ -7,19 +7,18 @@
 		  <script type="text/javascript" src="static/chat.js"></script>
 	</header>
 	<body>
-		<div id="random-string">
+		<form action="mailto:someone@example.com" method="post" enctype="text/plain">
+		Name:<br>
+		<input type="text" name="name"><br>
+		Your message:<br>
+		<input type="text" name="message"><br>
+		to whom :<br>
+		<input type="text" name="comment" size="50"><br><br>
+		<input type="submit" value="Send">
+		<input type="reset" value="Reset">
+		</form>
 
-		</div>
-
-		<div id="second-string">
-			
-		</div>
-		<button id="target">
-			click me for the first ten stories
-		</button>
-		<button id="second">
-			click me for the next ten stories
-		</button>
 		
 	</body>
 </html>
+
