@@ -10,7 +10,11 @@ conn = sqlite3.connect('chat.db')
 
 conn.execute('''CREATE TABLE IF NOT EXISTS messages(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	message TEXT)''')
+	message TEXT,
+	id_sender INTEGER,
+	id_receiver INTEGER, 
+	FOREIGN KEY(id_sender) REFERENCES users(id), 
+	FOREIGN KEY(id_receiver) REFERENCES users(id))''')
 
 conn.execute('''CREATE TABLE IF NOT EXISTS user(
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -23,9 +27,35 @@ conn.close()
 
 
 
-@app.route('/')
+@app.route('/' , methods=['POST'])
 def home_page():
+
+	name = request.form['name']
+	message = request.form['message']
+
+	if name and message:
+		newName = name[::-1]
+
+		return jsonify({'name' : newName})
+
+	return jsonify({'error' : 'Missing data!'})
 	return render_template("index.html")
+
+
+@app.route('/smessage')
+def send():
+	sender = request.form.get('sender')	
+	amessage = request.form.get('message')
+	receiver = request.form.get('receiver')
+
+	print(sender)
+	print(receiver)
+
+	connection = sqlite3.connect('chat.db')
+	c = connection.cursor()
+
+
+
 
 
 @app.route('/chatapp')
