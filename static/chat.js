@@ -1,53 +1,36 @@
-// $( document ).ready(function() {
-//     function fetch (){
+$( document ).ready(function() {
+    function fetch (){
 
-//     	$.get("/chatapp", function (data){
-//     		console.log(data);
+    	$.get("/chatapp", function (data){
+    		console.log(data);
 
-//     		$(".messages").empty();
-//     		data.forEach((x) => {
-//     			$(".messages").append(`<div>${x}</div>`);
+    		$(".messages").empty();
+    		data.forEach((x) => {
+    			$(".messages").append(`<div>${x}</div>`);
     			
-//     		});
-//     	});
-//     }
+    		});
+    	});
+    }
 
-//     function init() {
-//     	setInterval(function(){fetch(); }, 5000);
+    function init() {
+    	setInterval(function(){fetch(); }, 5000);
 
-//     }
+    }
 
-//     init();
-// });
+    init();
+});
 
 
-$(document).ready(function() {
 
-	$('form').on('submit', function(event) {
-
-		$.ajax({
-			data : {
-				name : $('#nameInput').val(),
-				message : $('#messageInput').val()
-			},
-			type : 'POST',
-			url : '/'
-		})
-		.done(function(data) {
-
-			if (data.error) {
-				$('#errorAlert').text(data.error).show();
-				$('#successAlert').hide();
-			}
-			else {
-				$('#successAlert').text(data.name).show();
-				$('#errorAlert').hide();
-			}
-
-		});
-
-		event.preventDefault();
-
-	});
-
+$( document ).ready(function() {
+    $('#messages', function(data){
+      $.ajax({
+      type: 'GET', 
+      url: '~/'
+      data: {text, text}
+    }).done(function( o ){
+      $('#messages' ).append( `<p>${data}</p>` );
+    });
+});
+    $.setInterval(ajax(), 1000);
 });

@@ -30,30 +30,26 @@ conn.close()
 @app.route('/' , methods=['POST'])
 def home_page():
 
-	name = request.form['name']
-	message = request.form['message']
+		conn = sqlite3.connect('chat.db')
+		c = conn.cursor()
+		my_text = request.form['text']
+		c.execute("INSERT INTO messages (message) values (?)", (message))
+		conn.commit()
+		conn.close()
+		return render_template('index.html')
 
-	if name and message:
-		newName = name[::-1]
+def gmessage():
+	conn = sqlite3.connect('chat.db')
+	c = conn.cursor()
+	new_messages = c.execute('SELECT * FROM messages').fetchall()
+	conn.close()
+	return new_messages
 
-		return jsonify({'name' : newName})
 
-	return jsonify({'error' : 'Missing data!'})
-	return render_template("index.html")
-
-
-@app.route('/smessage')
+@app.route('/gmessage' , methods=['GET'])
 def send():
-	sender = request.form.get('sender')	
-	amessage = request.form.get('message')
-	receiver = request.form.get('receiver')
-
-	print(sender)
-	print(receiver)
-
-	connection = sqlite3.connect('chat.db')
-	c = connection.cursor()
-
+	gmessage()
+	return render_template('index.html')
 
 
 
